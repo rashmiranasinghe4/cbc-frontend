@@ -11,7 +11,7 @@ import TestPage from './pages/admin/testPage';
 import { Toaster } from 'react-hot-toast';
 
 function App() {
-     const token = localStorage.getItem("token");
+     
 
    
   return (
@@ -23,7 +23,7 @@ function App() {
                   <Route path="/login" element={<LoginPage/>}/>
                    <Route path="/register" element={<RegisterPage/>}/>
                    <Route path="/test" element={<TestPage/>}/>
-                   <Route path="/admin/*" element={ token ? <AdminPage /> : <Navigate to="/login" replace /> }/>
+                   <Route path="/admin/*" element={<AdminPage/>}/>
 
              </Routes> 
              
