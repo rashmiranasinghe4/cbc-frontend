@@ -63,7 +63,7 @@ export default function ProductsAdminPage() {
 										<BiTrash
 											className="bg-red-500 p-[7px] text-3xl rounded-full text-white shadow-2xl shadow-black cursor-pointer"
 											onClick={() => {
-												const token = localStorage.getItem("token");
+												const token = localStorage.getItem("token",token);
 												if (token == null) {
 													navigate("/login");
 													return;

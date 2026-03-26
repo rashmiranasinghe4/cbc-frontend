@@ -1,10 +1,11 @@
 import "./productCard.css"
 export default function ProductCard(props){
-   console.log(props)
+   console.log(props)   
 
+                        
+        
 
-
-
+   
     return(
       <div className ="card fancy-border">
           <h1>{props.name}</h1>
@@ -13,4 +14,4 @@ export default function ProductCard(props){
            <button>View more</button>
       </div>
     )
-}
+} 
