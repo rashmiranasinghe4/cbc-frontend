@@ -1,7 +1,7 @@
-import axios from "axios";
+
 import { useState } from "react";
-import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 
 
 export default function AddProductAdminPage() {
@@ -22,16 +22,17 @@ export default function AddProductAdminPage() {
     const productData = {
             productId: productId,
             name: productName,
-            altNames: altNamesInArray,
+            altNames: altNames,
             labelledPrice: labelledPrice,
             price: price,
-            images: responses,
+            images: imagesInArray,
             description: description,
             stock: stock,
             isAvailable: isAvailable,
             category: category
         }
-
+		console.log(productData)
+	}
 
     return (
 		<div className="w-full h-full flex justify-center items-center">
@@ -154,4 +155,4 @@ export default function AddProductAdminPage() {
 		</div>
 	);
 }
-}
+
