@@ -68,9 +68,7 @@ function login(){
                 <button onClick={login} className="w-[350px] h-[40px] bg-blue-500 rounded-xl text-white text-lg mt-5 hover:bg-blue-600 transition-all duration-300">
                     Login
                 </button>
-                <button onClick={googleLogin} className="w-[350px] h-[40px] bg-blue-500 rounded-xl text-white text-lg mt-5 hover:bg-blue-600 transition-all duration-300">
-                    Google Login
-                </button>
+               
                 <p>Don't have an account? <Link to="/register" className="text-blue-500">Sign up</Link> from here</p>
                 <p>Forget Password? <Link to="/forget" className="text-blue-500">reset password</Link> from here</p>
                 
