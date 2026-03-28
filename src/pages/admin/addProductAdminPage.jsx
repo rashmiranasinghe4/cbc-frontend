@@ -1,7 +1,9 @@
 
 import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { Link , useNavigate } from "react-router-dom";			
 
-import { Link } from "react-router-dom";
 
 
 export default function AddProductAdminPage() {
@@ -15,24 +17,54 @@ export default function AddProductAdminPage() {
 	const [stock, setStock] = useState("");
 	const [isAvailable, setIsAvailable] = useState(true);
 	const [category, setCategory] = useState("cream");
-
+	const navigate = useNavigate();
 
  function  handleSubmit(){
-
+    const altNamesArray = alternativeNames.split(",").map(name => name.trim());
     const productData = {
             productId: productId,
             name: productName,
-            altNames: altNames,
+            altNames: altNamesArray,
             labelledPrice: labelledPrice,
             price: price,
-            images: imagesInArray,
+            images: [],
             description: description,
             stock: stock,
             isAvailable: isAvailable,
             category: category
         }
-		console.log(productData)
-	}
+		const token = localStorage.getItem("token");
+
+        if(token == null){
+            navigate("/login");
+            return;
+        }
+
+        axios.post(import.meta.env.VITE_BACKEND_URL + "/api/products", productData, 
+            {
+                headers:{
+                    Authorization: "Bearer "+token
+                }
+            }
+        ).then(
+            (res)=>{
+                console.log("Product added successfully");
+                console.log(res.data);
+                toast.success("Product added successfully");
+                navigate("/admin/products");
+            }
+        ).catch(
+            (error)=>{
+                console.error("Error adding product:", error);
+                toast.error("Failed to add product");              
+            }
+        )
+
+        console.log(productData);
+
+
+    }
+
 
     return (
 		<div className="w-full h-full flex justify-center items-center">
