@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { Link , useNavigate } from "react-router-dom";			
-
+import uploadFile from "../../utils/mediaUpload";
 
 
 export default function AddProductAdminPage() {
@@ -19,7 +19,22 @@ export default function AddProductAdminPage() {
 	const [category, setCategory] = useState("cream");
 	const navigate = useNavigate();
 
- function  handleSubmit(){
+ 
+
+	 async function  handleSubmit(){
+
+		const promisesArray = []
+
+		for(let i=0; i<images.length; i++){
+
+			const promise = uploadFile(images[i])
+			promisesArray[i] = promise
+
+		}
+
+		const responses = await Promise.all(promisesArray)
+		console.log(responses)		
+
     const altNamesArray = alternativeNames.split(",").map(name => name.trim());
     const productData = {
             productId: productId,
@@ -27,7 +42,7 @@ export default function AddProductAdminPage() {
             altNames: altNamesArray,
             labelledPrice: labelledPrice,
             price: price,
-            images: [],
+            images: responses,
             description: description,
             stock: stock,
             isAvailable: isAvailable,

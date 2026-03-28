@@ -1,7 +1,7 @@
-const url = "https://fsyqznlnsezitgwvrvuu.supabase.co"
+const url = "https://ddavukofbzormscyygkb.supabase.co"
 
 
-const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZzeXF6bmxuc2V6aXRnd3ZydnV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIwNTg2NjQsImV4cCI6MjA3NzYzNDY2NH0.2iVdSvfqs2CVACeAtp1VsEU7WQGtL-0bIGetagzcXtY"
+const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRkYXZ1a29mYnpvcm1zY3l5Z2tiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2NzIyMjAsImV4cCI6MjA5MDI0ODIyMH0.IX5_W73wHi18w95iqJ4jpnCaL_xK22muqWKr9peM5i4"
 
 import { createClient } from "@supabase/supabase-js";
 
