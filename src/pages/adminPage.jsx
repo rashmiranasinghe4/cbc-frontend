@@ -50,7 +50,7 @@ return (
 						<Route path="/" element={<h1>Dashboard</h1>} />
 						<Route path="/products" element={<ProductsAdminPage />} />
 						<Route path="/newProduct" element={<AddProductAdminPage />} />
-						
+						<Route path="/updateProduct" element={<UpdateProductPage />} />
 						
 					</Routes>
 				</div>
