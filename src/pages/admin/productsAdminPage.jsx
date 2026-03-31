@@ -1,15 +1,34 @@
-import {BiPlus} from "react-icons/bi";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { BiEdit, BiPlus, BiTrash } from "react-icons/bi";
+import { Link, useNavigate } from "react-router-dom";
+import Loader from "../../components/loader";
 
+export default function ProductsAdminPage() {
+	const [products, setProducts] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
+	// const [a,setA] = useState(0);
+	useEffect(() => {
+		if (isLoading) {
+			axios
+				.get(import.meta.env.VITE_BACKEND_URL + "/api/products")
+				.then((res) => {
+					setProducts(res.data);
+					setIsLoading(false);
+				});
+		}
+	}, [isLoading]);
 
-export default function ProductsAdminPage(){
-   const [products, setProducts] = useState([]);
+	const navigate = useNavigate();
 
-    return(
-       <div className = "w-full h-full border-[3px]">
-
-            <table>
+	return (
+		<div className="w-full h-full border-[3px]">
+			{isLoading ? (
+				<Loader/>
+			) : (
+				<table>
 					<thead>
 						<tr>
 							<th className="p-[10px]">Image</th>
@@ -64,7 +83,7 @@ export default function ProductsAdminPage(){
 														console.log("Product deleted successfully");
 														console.log(res.data);
 														toast.success("Product deleted successfully");
-														
+														setIsLoading(!isLoading);
 													})
 													.catch((error) => {
 														console.error("Error deleting product:", error);
@@ -97,9 +116,3 @@ export default function ProductsAdminPage(){
 		</div>
 	);
 }
-
-       
-		</div>
-	);
-}
-        

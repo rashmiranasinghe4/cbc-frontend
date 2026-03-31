@@ -5,6 +5,7 @@ import { IoPeople } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
 import ProductsAdminPage from "./admin/productsAdminPage";
 import AddProductAdminPage from "./admin/addProductAdminPage";
+import UpdateProductPage from "./admin/updateProduct";
 
 
 
