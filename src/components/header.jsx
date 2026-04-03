@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
+import { BiCart } from "react-icons/bi";
 
 export default function Header() {
 	return (
 		
-        <header className="bg-gray-800 py-4">
-			<div className="hidden w-full md:flex justify-center items-center">
+        <header className="h-[100px]  bg-blue-500 flex items-center justify-center relative">
+			
 				<Link to="/" className="text-white text-xl ">
 					Home
 				</Link>
@@ -20,8 +21,11 @@ export default function Header() {
 				<Link to="/contact-us" className="ml-4 text-white text-xl">
 					Contact Us
 				</Link>
+				<Link to="/Cart" className="absolute right-[80px]">
+					<BiCart className="text-white text-3xl" ml-4/>	
+				</Link>
 				
-                </div>
+                
 		</header>
 	);
 }

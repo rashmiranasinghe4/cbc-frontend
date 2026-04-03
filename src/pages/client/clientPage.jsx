@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Header from "../../components/header";
 import ProductsPage from "./productsPage";
 import ProductOverViewPage from "./productOverViewPage";
-
+import CartPage from "./cart";
 
 
 
@@ -34,6 +34,10 @@ export default function ClientWebPage() {
 						path="/contact-us"
 						element={<h1 className="text-3xl text-center">Contact Us Page</h1>}
 					/>
+					 <Route
+                        path="/Cart"     
+                        element={<CartPage/>}
+                    />
 					
                     <Route
                         path="/overview/:productId"     
