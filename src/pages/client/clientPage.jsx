@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Header from "../../components/header";
 import ProductsPage from "./productsPage";
 import ProductOverViewPage from "./productOverViewPage";
+import CheckoutPage from "./checkoutPage";
 import CartPage from "./cart";
 
 
@@ -38,6 +39,11 @@ export default function ClientWebPage() {
                         path="/Cart"     
                         element={<CartPage/>}
                     />
+					 <Route
+                        path="/Checkout"     
+                        element={<CheckoutPage/>}
+                    />
+					
 					
                     <Route
                         path="/overview/:productId"     

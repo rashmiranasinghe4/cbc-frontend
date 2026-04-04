@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { addToCart, getCart, getTotal } from "../../utils/cart";
 import { TbTrash } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
 
 
 export default function CartPage() {
 	const [cart, setCart] = useState(getCart());
-	
+	const navigate = useNavigate();
 	console.log(cart);
 	return (
 		<div className="w-[100vw] max-w-[100vw] h-screen flex flex-col px-[10px] py-[40px] items-center">
@@ -96,6 +97,14 @@ export default function CartPage() {
 					})}
 				</span>
 				
+			<button
+					className="absolute left-[10px] w-[200px] text-2xl md:text-md md:w-[150px] h-[50px] cursor-pointer rounded-lg shadow-2xl bg-accent border-[2px] border-accent text-blue hover:bg-white hover:text-accent"
+					onClick={() => {
+						navigate("/checkout", { state: { items: cart } });
+					}}
+				>
+					Checkout
+				</button>
 			</div>
 		</div>
 	);
