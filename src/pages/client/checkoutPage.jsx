@@ -60,7 +60,10 @@ export default function CheckoutPage() {
       navigate("/login");
       return;
     }
-    
+     if (name === "" || address === "" || phone === "") {
+      toast.error("Please fill all the fields");
+      return;
+    }
     const order = {
       address: address,
       phone: phone,

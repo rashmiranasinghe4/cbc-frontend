@@ -6,6 +6,7 @@ import { IoSettings } from "react-icons/io5";
 import ProductsAdminPage from "./admin/productsAdminPage";
 import AddProductAdminPage from "./admin/addProductAdminPage";
 import UpdateProductPage from "./admin/updateProduct";
+import OrdersPageAdmin from "./admin/ordersPageAdmin";
 
 
 
@@ -52,6 +53,7 @@ return (
 						<Route path="/products" element={<ProductsAdminPage />} />
 						<Route path="/newProduct" element={<AddProductAdminPage />} />
 						<Route path="/updateProduct" element={<UpdateProductPage />} />
+						<Route path="/orders" element={<OrdersPageAdmin />} />
 						
 					</Routes>
 				</div>
