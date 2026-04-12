@@ -4,21 +4,45 @@ import { GiShoppingBag } from "react-icons/gi";
 import { IoPeople } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
 import ProductsAdminPage from "./admin/productsAdminPage";
-import AddProductAdminPage from "./admin/addProductAdminPage";
+import AddProductPage from "./admin/addProductAdminPage";
 import UpdateProductPage from "./admin/updateProduct";
 import OrdersPageAdmin from "./admin/ordersPageAdmin";
-
-
-
-
+import { useEffect, useState } from "react";
+import Loader from "../components/loader";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function AdminPage() {
-
-
-
-return (
+	const navigate = useNavigate();
+	const [adminValidated, setAdminValidated] = useState(false);
+	useEffect(
+        ()=>{
+            const token = localStorage.getItem("token");
+            if(token == null){
+                toast.error("You are not logged in");
+                navigate("/login");
+            }else{
+                axios.get(import.meta.env.VITE_BACKEND_URL+"/api/users/", {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }).then((response) => {
+                    if (response.data.role == "admin") {
+                        setAdminValidated(true);
+                    } else {
+                        toast.error("You are not authorized");
+                        navigate("/login");
+                    }
+                }).catch(() => {
+                    toast.error("You are not authorized");
+                    navigate("/login");
+                });
+            }
+        }
+    ,[]);
+	return (
 		<div className="w-full h-screen  flex">
-			
+			{adminValidated?<>
 				<div className="w-[300px] h-full flex flex-col items-center">
 					<span className="text-3xl font-bold my-5">Admin Panel</span>
 
@@ -51,13 +75,12 @@ return (
 					<Routes path="/*">
 						<Route path="/" element={<h1>Dashboard</h1>} />
 						<Route path="/products" element={<ProductsAdminPage />} />
-						<Route path="/newProduct" element={<AddProductAdminPage />} />
-						<Route path="/updateProduct" element={<UpdateProductPage />} />
+						<Route path="/newProduct" element={<AddProductPage />} />
 						<Route path="/orders" element={<OrdersPageAdmin />} />
-						
+						<Route path="/updateProduct" element={<UpdateProductPage />} />
 					</Routes>
 				</div>
-			
+			</>:<Loader/>}
 		</div>
 	);
 }
