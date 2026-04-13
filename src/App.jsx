@@ -5,7 +5,8 @@ import HomePage from './pages/homePage';
 import LoginPage from './pages/loginPage';
 import RegisterPage from './pages/registerPage';
 import AdminPage from './pages/adminPage';
-import TestPage from './pages/testPage';
+import ContactPage from "./pages/contactPage";
+import ReviewPage from "./pages/reviewPage";
 import { Toaster } from 'react-hot-toast';
 import ClientWebPage from "./pages/client/clientPage";
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -26,7 +27,9 @@ function App() {
                  <Route path="/" element={<HomePage/>}/>
                   <Route path="/login" element={<LoginPage/>}/>
                    <Route path="/register" element={<RegisterPage/>}/>
-                   <Route path="/test" element={<TestPage/>}/>
+                   <Route path="/contact-us" element={<ContactPage/>}/>
+                    <Route path="/reviews" element={<ReviewPage/>}/>
+                    
                    <Route path="/admin/*" element={<AdminPage/>}/>  
                    <Route path="/forget" element={<ForgetPasswordPage/>}/>
                    <Route path="/*" element={<ClientWebPage/>}/>
