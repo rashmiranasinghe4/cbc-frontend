@@ -1,12 +1,14 @@
 
 import { BrowserRouter, Route, Routes ,Navigate} from 'react-router-dom';
 import './App.css'
+import Header from './components/header';
 import HomePage from './pages/homePage';
 import LoginPage from './pages/loginPage';
 import RegisterPage from './pages/registerPage';
 import AdminPage from './pages/adminPage';
 import ContactPage from "./pages/contactPage";
 import ReviewPage from "./pages/reviewPage";
+import AboutPage from "./pages/aboutPage";
 import { Toaster } from 'react-hot-toast';
 import ClientWebPage from "./pages/client/clientPage";
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -20,6 +22,7 @@ function App() {
 
   return (
       <BrowserRouter>
+       <Header />
       <GoogleOAuthProvider clientId={clientId}>
           <div className='w-full h-screen flex justify-center items-center'>
              <Toaster position="top-right"></Toaster>
@@ -29,7 +32,7 @@ function App() {
                    <Route path="/register" element={<RegisterPage/>}/>
                    <Route path="/contact-us" element={<ContactPage/>}/>
                     <Route path="/reviews" element={<ReviewPage/>}/>
-                    
+                    <Route path="/about-us" element={<AboutPage/>}/>
                    <Route path="/admin/*" element={<AdminPage/>}/>  
                    <Route path="/forget" element={<ForgetPasswordPage/>}/>
                    <Route path="/*" element={<ClientWebPage/>}/>
