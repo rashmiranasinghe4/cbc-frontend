@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Header from "../../components/header";
+
 import ProductsPage from "./productsPage";
 import ProductOverViewPage from "./productOverViewPage";
 import CheckoutPage from "./checkoutPage";
@@ -10,7 +10,7 @@ import CartPage from "./cart";
 export default function ClientWebPage() {
 	return (
 		<div className="w-full h-screen max-h-screen">
-			<Header/>
+			
 			<div className="w-full h-[calc(100%-100px)] ">
 				<Routes path="/">
 					<Route

@@ -32,37 +32,26 @@ export default function LoginPage() {
     })
 
 
-function login(){
-        console.log(email, password)
-        axios.post(import.meta.env.VITE_BACKEND_URL+"/api/users/login",{
-            email: email,
-            password: password
-        }).then(
-            (response)=>{
-                console.log(response.data)
-                localStorage.setItem("token",response.data.token)
+function login(e){
+    if(e) e.preventDefault();
 
-                // const token = localStorage.getItem("token")
-                toast.success("login successful")
-                if(response.data.role == "admin"){
+    axios.post(import.meta.env.VITE_BACKEND_URL+"/api/users/login",{
+        email: email,
+        password: password
+    }).then((response)=>{
+        localStorage.setItem("token",response.data.token)
 
-                    //window.location.href = "/admin"
-                    navigate("/admin")
+        toast.success("login successful")
 
-                }else if(response.data.role == "user"){
-
-                    //window.location.href = "/"
-                    navigate("/")
-
-                }
-            }
-        ).catch(
-            (error)=>{
-                console.log(error)
-                toast.error("Login Failed")
-            }
-        )
-    }
+        if(response.data.role === "admin"){
+            navigate("/admin")
+        } else {
+            navigate("/")
+        }
+    }).catch(()=>{
+        toast.error("Login Failed")
+    })
+}
 
 	return (
 		<div className="w-full h-screen bg-[url(./loginbg.jpg)] bg-cover bg-center flex justify-center items-center">

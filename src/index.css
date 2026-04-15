@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #FBF5DE50;
-  --color-secondary: #2C2C2C;
-  --color-accent: #4e1aba;
+  --color-primary:       #FFF0F5;   /* soft blush — page backgrounds         */
+  --color-secondary:     #1A1A2E;   /* deep navy  — dark text & admin areas  */
+  --color-accent:        #E91E8C; 
 }
