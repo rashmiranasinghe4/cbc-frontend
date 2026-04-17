@@ -3,11 +3,11 @@ import axios from "axios";
 
 const STATIC_REVIEWS = [
   { name: "Sarah K.", rating: 5, comment: "Amazing quality! My skin feels incredible.", date: "March 2025" },
-  { name: "Lena M.", rating: 5, comment: "Love this brand. Fast shipping and beautiful packaging.", date: "February 2025" },
+  { name: "Lena M.", rating: 5, comment: "Love this brand. Fast shipping and beautiful packaging.", date: "February 2026" },
   { name: "Priya D.", rating: 4, comment: "Great products, will definitely order again!", date: "January 2025" },
   { name: "Julia R.", rating: 5, comment: "The moisturizer is my holy grail. Highly recommend.", date: "April 2025" },
-  { name: "Amina B.", rating: 4, comment: "Good value for money, very happy with my purchase.", date: "March 2025" },
-  { name: "Chloe T.", rating: 5, comment: "Packaging is gorgeous and products work wonderfully.", date: "April 2025" },
+  { name: "Amina B.", rating: 4, comment: "Good value for money, very happy with my purchase.", date: "March 2026" },
+  { name: "Chali T.", rating: 5, comment: "Packaging is gorgeous and products work wonderfully.", date: "April 2025" },
 ];
 
 function StarRating({ rating }) {
