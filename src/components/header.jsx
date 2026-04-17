@@ -8,6 +8,15 @@ export default function Header() {
 	const navigate = useNavigate();
 	const [isOpen, setIsOpen] = useState(false);
 	const token = localStorage.getItem("token");
+
+	function logout() {
+  localStorage.removeItem("token");
+  setToken(null);
+  navigate("/"); // go home instead of login
+}
+	
+	
+
 	return (
 		<header className="h-[100px] bg-accent flex justify-center items-center relative">
 			{isOpen && (
@@ -92,44 +101,38 @@ export default function Header() {
 				<Link to="/contact-us" className="ml-4 text-white text-xl">
 					Contact Us
 				</Link>
-				<Link to="/cart" className="absolute right-[250px] ">
+				<Link to="/cart" className="absolute right-[350px] top-1/2 -translate-y-1/2 z-50"> 
 					<BiCart className="text-white text-3xl ml-4" />
 				</Link>
 				<div className="absolute right-[40px] flex items-center gap-4">
-  				
-  				
-					{token ? (
-						<button
-							className="text-white text-lg"
-							onClick={logout}
-						>
-							Logout
-						</button>
 
+  {/* always show */}
+  <Link 
+	to="/login" 
+	className="px-4 py-1 rounded-full border border-white text-accent bg-white hover:text-accent transition"
+  >
+	Login
+  </Link>
 
-			) : (
-				<>
-				<Link to="/login" 
-				className="bg-white text-accent px-4 py-1 rounded-full"
-				>
-					Login
-				</Link>
+  <Link
+	to="/register"
+	className="px-4 py-1 rounded-full border border-white text- bg-white text-accent transition"
+  >
+	Sign Up
+  </Link>
 
-				<Link
-					to="/register"
-					className="bg-white text-accent px-4 py-1 rounded-full"
-				>
-					Sign Up
-				</Link>
-				</>
-			)}
+  {/* show logout ONLY if logged in */}
+  {token && (
+	<button
+	  onClick={logout}
+	  className="px-4 py-1 rounded-full bg-white text-accent hover:opacity-80 transition"
+	>
+	  Logout
+	</button>
+  )}
+
+				</div>
 			</div>
-
-			
-			</div>		
-
-		
 		</header>
 	);
-	
 }

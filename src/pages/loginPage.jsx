@@ -31,27 +31,37 @@ export default function LoginPage() {
         }
     })
 
+    function login(){
+        console.log(email, password)
+        axios.post(import.meta.env.VITE_BACKEND_URL+"/api/users/login",{
+            email: email,
+            password: password
+        }).then(
+            (response)=>{
+                console.log(response.data)
+                localStorage.setItem("token",response.data.token)
 
-function login(e){
-    if(e) e.preventDefault();
+                // const token = localStorage.getItem("token")
+                toast.success("login successful")
+                if(response.data.role == "admin"){
 
-    axios.post(import.meta.env.VITE_BACKEND_URL+"/api/users/login",{
-        email: email,
-        password: password
-    }).then((response)=>{
-        localStorage.setItem("token",response.data.token)
+                    //window.location.href = "/admin"
+                    navigate("/admin")
 
-        toast.success("login successful")
+                }else if(response.data.role == "user"){
 
-        if(response.data.role === "admin"){
-            navigate("/admin")
-        } else {
-            navigate("/")
-        }
-    }).catch(()=>{
-        toast.error("Login Failed")
-    })
-}
+                    //window.location.href = "/"
+                    navigate("/")
+
+                }
+            }
+        ).catch(
+            (error)=>{
+                console.log(error)
+                toast.error("Login Failed")
+            }
+        )
+    }
 
 	return (
 		<div className="w-full h-screen bg-[url(./loginbg.jpg)] bg-cover bg-center flex justify-center items-center">
@@ -77,17 +87,16 @@ function login(e){
                     } type="password" className="w-[350px] h-[40px] border border-white rounded-xl"/>
 
                 </div>
-                <button onClick={login} className="w-[350px] h-[40px] bg-blue-500 rounded-xl text-white text-lg mt-5 hover:bg-blue-600 transition-all duration-300">
+                <button onClick={login} className="w-[350px] h-[40px] bg-accent rounded-xl text-white text-lg mt-5 hover:bg-blue-600 transition-all duration-300">
                     Login
                 </button>
-                 <button onClick={googleLogin} className="w-[350px] h-[40px] bg-blue-500 rounded-xl text-white text-lg mt-5 hover:bg-blue-600 transition-all duration-300">
+                <button onClick={googleLogin} className="w-[350px] h-[40px] bg-accent rounded-xl text-white text-lg mt-5 hover:bg-blue-600 transition-all duration-300">
                     Google Login
                 </button>
-               
-                <p>Don't have an account? <Link to="/register" className="text-blue-500">Sign up</Link> from here</p>
-                <p>Forget Password? <Link to="/forget" className="text-blue-500">reset password</Link> from here</p>
+                <p>Don't have an account? <Link to="/register" className="accent">Sign up</Link> from here</p>
+                <p>Forget Password? <Link to="/forget" className="accent">reset password</Link> from here</p>
                 
 			</div>
 		</div>
 	);
-}    
+}

@@ -7,6 +7,9 @@ import ProductsAdminPage from "./admin/productsAdminPage";
 import AddProductPage from "./admin/addProductAdminPage";
 import UpdateProductPage from "./admin/updateProduct";
 import OrdersPageAdmin from "./admin/ordersPageAdmin";
+import UsersAdminPage from "./admin/usersAdminPage";
+import SettingsAdminPage from "./admin/settingsAdminPage";
+import DashboardPage from "./admin/dashboardPage";
 import { useEffect, useState } from "react";
 import Loader from "../components/loader";
 import axios from "axios";
@@ -73,11 +76,13 @@ export default function AdminPage() {
 				</div>
 				<div className="w-[calc(100%-300px)]  h-full">
 					<Routes path="/*">
-						<Route path="/" element={<h1>Dashboard</h1>} />
+						<Route path="/dashboard" element={<DashboardPage />} />
 						<Route path="/products" element={<ProductsAdminPage />} />
 						<Route path="/newProduct" element={<AddProductPage />} />
 						<Route path="/orders" element={<OrdersPageAdmin />} />
 						<Route path="/updateProduct" element={<UpdateProductPage />} />
+						<Route path="/users" element={<UsersAdminPage />} />
+						<Route path="/settings" element={<SettingsAdminPage />} />
 					</Routes>
 				</div>
 			</>:<Loader/>}
