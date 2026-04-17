@@ -10,7 +10,7 @@ export default function UsersAdminPage() {
     if (!loading) return;
 
     axios
-      .get(import.meta.env.VITE_BACKEND_URL + "/api/users", {
+      .get(import.meta.env.VITE_BACKEND_URL + "/api/users/all", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -29,7 +29,7 @@ export default function UsersAdminPage() {
   function toggleBlock(userId, currentlyBlocked) {
     axios
       .put(
-        import.meta.env.VITE_BACKEND_URL + "/api/users/" + userId,
+        import.meta.env.VITE_BACKEND_URL + "/api/users/update/" + userId,
         { blocked: !currentlyBlocked },
         {
           headers: {
