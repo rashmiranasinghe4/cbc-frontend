@@ -35,45 +35,83 @@ export default function ForgetPasswordPage() {
         }
     }
 	return (
-		<div className="w-full h-full flex justify-center items-center text-secondary">
-			{!emailSent&&<div className="bg-primary w-[500px] h-[500px] shadow-2xl flex flex-col items-center justify-center gap-[20px] rounded-[30px]">
-				<h1 className="text-2xl font-bold">Reset Password</h1>
-				<input
-					type="email"
-					placeholder="Enter your email"
-					className="w-[350px] h-[40px] border border-white rounded-xl text-center"
-					onChange={(e) => setEmail(e.target.value)}
-				/>
-				<button onClick={sendOTP} className="w-[350px] h-[40px] bg-blue-500 rounded-xl text-white text-lg mt-5 hover:bg-blue-600 transition-all duration-300">
-					Send OTP
-				</button>
-			</div>}
-            {
-                emailSent&& <div className="bg-primary w-[500px] h-[500px] shadow-2xl flex flex-col items-center justify-center gap-[20px] rounded-[30px]">
-                    <h1 className="text-2xl font-bold">Verify OTP</h1>
-                    <input
-                        type="text"
-                        placeholder="Enter OTP"
-                        className="w-[350px] h-[40px] border border-white rounded-xl text-center"
-                        onChange={(e) => setOtp(e.target.value)}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Enter new password"
-                        className="w-[350px] h-[40px] border border-white rounded-xl text-center"
-                        onChange={(e) => setNewPassword(e.target.value)}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Confirm new password"
-                        className="w-[350px] h-[40px] border border-white rounded-xl text-center"
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-                    <button onClick={resetPassword} className="w-[350px] h-[40px] bg-blue-500 rounded-xl text-white text-lg mt-5 hover:bg-blue-600 transition-all duration-300">
-                        Reset Password
-                    </button>
-                </div>
-            }
+	<div
+		className="w-full min-h-screen flex items-center justify-center px-4"
+		style={{
+			backgroundImage: "url('/background.jpg')",
+			backgroundSize: "cover",
+			backgroundPosition: "center",
+		}}
+	>
+
+		<div className="w-full max-w-sm bg-white/70 backdrop-blur-md rounded-3xl shadow-xl border border-white/60 px-8 py-10">
+
+			{/* TITLE */}
+			<div className="text-center mb-6">
+				<h1 className="text-2xl font-bold text-[#2C183E]">
+					Reset Password
+				</h1>
+				<p className="text-xs text-gray-500 mt-1">
+					Recover your account
+				</p>
+			</div>
+
+			{/* STEP 1 */}
+			{!emailSent && (
+				<div className="flex flex-col gap-4">
+
+					<input
+						type="email"
+						placeholder="Enter email"
+						onChange={(e) => setEmail(e.target.value)}
+						className="w-full border rounded-xl px-4 py-2 bg-white/60"
+					/>
+
+					<button
+						onClick={sendOTP}
+						className="w-full bg-[#7B3F8C] text-white py-2 rounded-xl hover:bg-[#5a2a68]"
+					>
+						Send OTP
+					</button>
+
+				</div>
+			)}
+
+			{/* STEP 2 */}
+			{emailSent && (
+				<div className="flex flex-col gap-4">
+
+					<input
+						placeholder="OTP"
+						onChange={(e) => setOtp(e.target.value)}
+						className="w-full border rounded-xl px-4 py-2 bg-white/60"
+					/>
+
+					<input
+						type="password"
+						placeholder="New Password"
+						onChange={(e) => setNewPassword(e.target.value)}
+						className="w-full border rounded-xl px-4 py-2 bg-white/60"
+					/>
+
+					<input
+						type="password"
+						placeholder="Confirm Password"
+						onChange={(e) => setConfirmPassword(e.target.value)}
+						className="w-full border rounded-xl px-4 py-2 bg-white/60"
+					/>
+
+					<button
+						onClick={resetPassword}
+						className="w-full bg-[#2C183E] text-white py-2 rounded-xl hover:bg-[#7B3F8C]"
+					>
+						Reset Password
+					</button>
+
+				</div>
+			)}
+
 		</div>
-	);
+	</div>
+);
 }

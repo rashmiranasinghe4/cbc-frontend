@@ -1,146 +1,167 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function SettingsAdminPage() {
-  const [form, setForm] = useState({
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
+  const navigate = useNavigate();
+
+  const [store, setStore] = useState({
+    name: "CBC Cosmetic Shop",
+    email: "hello@cbc.lk",
+    phone: "+94 77 000 0000",
+    address: "Colombo, Sri Lanka",
   });
 
+  const [notifications, setNotifications] = useState(true);
+  const [currency, setCurrency] = useState("LKR");
+
   function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setStore({ ...store, [e.target.name]: e.target.value });
   }
 
-  function changePassword() {
-    if (form.newPassword !== form.confirmPassword) {
-      toast.error("Passwords do not match");
-      return;
-    }
-
-    axios
-      .put(
-        import.meta.env.VITE_BACKEND_URL + "/api/users/password",
-        {
-          currentPassword: form.currentPassword,
-          newPassword: form.newPassword,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
-      .then(() => {
-        toast.success("Password updated");
-        setForm({
-          currentPassword: "",
-          newPassword: "",
-          confirmPassword: "",
-        });
-      })
-      .catch(() => toast.error("Failed to update password"));
+  function saveSettings() {
+    toast.success("Settings saved successfully");
   }
-
-  const inputClass =
-    "w-full border border-gray-200 rounded-xl px-4 py-2 text-sm outline-none focus:border-[#7B3F8C]";
 
   return (
-    <div className="w-full h-full flex flex-col items-center bg-[#F3E8F7] p-8">
+    <div className="min-h-screen bg-[#F3E8F7] p-8 flex justify-center">
 
-      {/* TITLE */}
-      <div className="text-center mb-8">
-        <h1 className="text-2xl font-bold text-[#2C183E]">
-          Account Settings
-        </h1>
-        <p className="text-sm text-gray-500">
-          Manage your store security and business information
-        </p>
-      </div>
+      <div className="w-full max-w-5xl space-y-6">
 
-      {/* MAIN CARD */}
-      <div className="w-full max-w-5xl bg-white rounded-2xl shadow-md p-8 flex gap-8">
-
-        {/* LEFT - PASSWORD */}
-        <div className="w-1/2">
-          <h2 className="text-lg font-semibold text-[#2C183E] mb-4">
-            Change Password
-          </h2>
-
-          <div className="flex flex-col gap-3">
-            <input
-              name="currentPassword"
-              type="password"
-              placeholder="Current Password"
-              value={form.currentPassword}
-              onChange={handleChange}
-              className={inputClass}
-            />
-
-            <input
-              name="newPassword"
-              type="password"
-              placeholder="New Password"
-              value={form.newPassword}
-              onChange={handleChange}
-              className={inputClass}
-            />
-
-            <input
-              name="confirmPassword"
-              type="password"
-              placeholder="Confirm Password"
-              value={form.confirmPassword}
-              onChange={handleChange}
-              className={inputClass}
-            />
-
-            <button
-              onClick={changePassword}
-              className="bg-[#7B3F8C] text-white rounded-xl py-2 mt-2 hover:opacity-90"
-            >
-              Update Password
-            </button>
-          </div>
+        {/* HEADER */}
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-[#2C183E]">
+            Store Settings
+          </h1>
+          <p className="text-sm text-gray-500">
+            Manage your business profile and preferences
+          </p>
         </div>
 
-        {/* RIGHT - STORE INFO */}
-        <div className="w-1/2 border-l pl-8">
-          <h2 className="text-lg font-semibold text-[#2C183E] mb-4">
-            Store Information
-          </h2>
+        {/* GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-          <div className="flex flex-col gap-3">
-            <input
-              type="text"
-              defaultValue="CBC Cosmetic Shop"
-              className={inputClass}
-              placeholder="Store Name"
-            />
+          {/* STORE INFO */}
+          <div className="bg-white rounded-2xl shadow p-6">
 
-            <input
-              type="email"
-              defaultValue="hello@cbc.lk"
-              className={inputClass}
-              placeholder="Email"
-            />
+            <h2 className="text-lg font-semibold text-[#2C183E] mb-4">
+              Store Information
+            </h2>
 
-            <input
-              type="text"
-              defaultValue="+94 77 000 0000"
-              className={inputClass}
-              placeholder="Phone"
-            />
+            <div className="space-y-3">
 
-            <button
-              onClick={() => toast.success("Settings saved")}
-              className="bg-[#7B3F8C] text-white rounded-xl py-2 mt-2 hover:opacity-90"
-            >
-              Save Changes
-            </button>
+              <input
+                name="name"
+                value={store.name}
+                onChange={handleChange}
+                className="w-full border rounded-xl px-3 py-2"
+                placeholder="Store Name"
+              />
+
+              <input
+                name="email"
+                value={store.email}
+                onChange={handleChange}
+                className="w-full border rounded-xl px-3 py-2"
+                placeholder="Email"
+              />
+
+              <input
+                name="phone"
+                value={store.phone}
+                onChange={handleChange}
+                className="w-full border rounded-xl px-3 py-2"
+                placeholder="Phone"
+              />
+
+              <input
+                name="address"
+                value={store.address}
+                onChange={handleChange}
+                className="w-full border rounded-xl px-3 py-2"
+                placeholder="Address"
+              />
+
+            </div>
           </div>
+
+          {/* BUSINESS SETTINGS */}
+          <div className="bg-white rounded-2xl shadow p-6">
+
+            <h2 className="text-lg font-semibold text-[#2C183E] mb-4">
+              Business Preferences
+            </h2>
+
+            <div className="space-y-4">
+
+              {/* Currency */}
+              <div>
+                <label className="text-sm text-gray-600">
+                  Currency
+                </label>
+
+                <select
+                  value={currency}
+                  onChange={(e) => setCurrency(e.target.value)}
+                  className="w-full border rounded-xl px-3 py-2 mt-1"
+                >
+                  <option value="LKR">LKR (Sri Lanka)</option>
+                  <option value="USD">USD</option>
+                </select>
+              </div>
+
+              {/* Notifications */}
+              <div className="flex items-center justify-between border p-3 rounded-xl">
+                <span className="text-sm font-medium text-[#2C183E]">
+                  Order Notifications
+                </span>
+
+                <input
+                  type="checkbox"
+                  checked={notifications}
+                  onChange={() => setNotifications(!notifications)}
+                  className="w-5 h-5 accent-[#7B3F8C]"
+                />
+              </div>
+
+            </div>
+          </div>
+
         </div>
+
+        {/* ACTIONS */}
+        <div className="bg-white rounded-2xl shadow p-6 flex flex-col md:flex-row justify-between items-center gap-4">
+
+          <button
+            onClick={() => {
+              localStorage.removeItem("cart");
+              toast.success("Cache cleared");
+            }}
+            className="bg-[#2C183E] text-white px-6 py-2 rounded-xl hover:bg-[#5a2a68]"
+          >
+            Clear Cart Cache
+          </button>
+
+          <button
+            onClick={saveSettings}
+            className="bg-[#7B3F8C] text-white px-6 py-2 rounded-xl hover:bg-[#5a2a68]"
+          >
+            Save Settings
+          </button>
+
+          <button
+            onClick={() => {
+              localStorage.removeItem("token");
+              toast.success("Logged out");
+              navigate("/login");
+            }}
+            className="bg-[#2C183E] text-white px-6 py-2 rounded-xl hover:bg-black"
+          >
+            Logout
+          </button>
+
+        </div>
+
       </div>
     </div>
   );

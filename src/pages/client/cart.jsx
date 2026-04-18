@@ -9,103 +9,91 @@ export default function CartPage() {
 	const navigate = useNavigate();
 	console.log(cart);
 	return (
-		<div className="w-[100vw] max-w-[100vw] h-screen flex flex-col px-[10px] py-[40px] items-center">
-			{cart.map((item) => {
-				return (
-					<div
-						key={item.productId}
-						className="w-full md:w-[800px] h-[200px] md:h-[100px] m-[10px] shadow-2xl flex flex-row items-center relative "
+	<div
+		className="min-h-screen w-full bg-[#F3E8F7] flex flex-col items-center py-10 px-4"
+	>
+
+		{/* CART ITEMS */}
+		{cart.map((item) => (
+			<div
+				key={item.productId}
+				className="w-full max-w-4xl bg-white rounded-xl shadow-md flex items-center p-4 gap-4 mb-4"
+			>
+
+				<img
+					src={item.image}
+					className="w-20 h-20 object-cover rounded-lg border"
+				/>
+
+				<div className="flex-1">
+					<p className="font-bold text-[#2C183E]">{item.name}</p>
+					<p className="text-sm text-gray-500">
+						{item.price.toLocaleString("en-US")}
+					</p>
+				</div>
+
+				{/* QTY */}
+				<div className="flex items-center gap-2">
+
+					<button
+						className="w-8 h-8 bg-[#7B3F8C] text-white rounded"
+						onClick={() => {
+							addToCart(item, -1);
+							setCart(getCart());
+						}}
 					>
-						<div className="md:w-[100px] w-[200px] justify-center items-center flex flex-col text-2xl md:text-md">
-							<img
-								src={item.image}
-								className="w-[100px] h-[100px] object-cover"
-							/>
-							<div className=" h-full   flex-col justify-center pl-[10px] md:hidden flex">
-								<span className=" font-bold text-center md:text-left">
-									{item.name}
-								</span>
-								{/* price */}
-								<span className=" font-semibold text-center md:text-left">
-									{item.price.toLocaleString("en-US", {
-										minimumFractionDigits: 2,
-										maximumFractionDigits: 2,
-									})}
-								</span>
-							</div>
-						</div>
-						<div className="w-[320px] h-full   flex-col justify-center pl-[10px] hidden md:flex">
-							<span className=" font-bold text-center md:text-left">
-								{item.name}
-							</span>
-							{/* price */}
-							<span className=" font-semibold text-center md:text-left">
-								{item.price.toLocaleString("en-US", {
-									minimumFractionDigits: 2,
-									maximumFractionDigits: 2,
-								})}
-							</span>
-						</div>
-						<div className="w-[190px] h-full text-4xl md:text-md  flex flex-row justify-center items-center ">
-							<button
-								className="flex justify-center items-center w-[30px] rounded-lg bg-accent text-white cursor-pointer hover:bg-blue-400"
-								onClick={() => {
-									addToCart(item, -1);
-									setCart(getCart());
-								}}
-							>
-								-
-							</button>
-							<span className="mx-[10px]">{item.quantity}</span>
-							<button
-								className="flex justify-center items-center w-[30px] rounded-lg bg-accent text-white cursor-pointer hover:bg-blue-400"
-								onClick={() => {
-									addToCart(item, 1);
-									setCart(getCart());
-								}}
-							>
-								+
-							</button>
-						</div>
-						<div className="w-[190px] text-3xl md:text-md h-full flex justify-end items-center pr-[10px]">
-							{/* total quantity * price */}
-							<span className="font-semibold">
-								{(item.quantity * item.price).toLocaleString("en-US", {
-									minimumFractionDigits: 2,
-									maximumFractionDigits: 2,
-								})}
-							</span>
-						</div>
-						<button
-							className="w-[30px] h-[30px] absolute top-[0px] right-[0px] md:top-[35px]  md:right-[-40px] cursor-pointer bg-red-700 shadow rounded-full flex justify-center items-center text-white border-[2px] border-red-700 hover:bg-white hover:text-red-700"
-							onClick={() => {
-								addToCart(item, -item.quantity);
-								setCart(getCart());
-							}}
-						>
-							<TbTrash className="text-xl" />
-						</button>
-					</div>
-				);
-			})}
-			<div className="md:w-[800px] w-full h-[100px] m-[10px] p-[10px] shadow-2xl flex flex-row items-center justify-end relative">
-				<span className="font-bold text-2xl ">
-					Total:{" "}
-					{getTotal().toLocaleString("en-US", {
-						minimumFractionDigits: 2,
-						maximumFractionDigits: 2,
-					})}
-				</span>
-				
-			<button
-					className="absolute left-[10px] w-[200px] text-2xl md:text-md md:w-[150px] h-[50px] cursor-pointer rounded-lg shadow-2xl bg-accent border-[2px] border-accent text-blue hover:bg-white hover:text-accent"
+						-
+					</button>
+
+					<span>{item.quantity}</span>
+
+					<button
+						className="w-8 h-8 bg-[#7B3F8C] text-white rounded"
+						onClick={() => {
+							addToCart(item, 1);
+							setCart(getCart());
+						}}
+					>
+						+
+					</button>
+
+				</div>
+
+				{/* TOTAL */}
+				<div className="font-bold text-[#7B3F8C] w-24 text-right">
+					{(item.quantity * item.price).toLocaleString("en-US")}
+				</div>
+
+				{/* DELETE */}
+				<button
+					className="text-red-600 hover:text-red-800"
 					onClick={() => {
-						navigate("/checkout", { state: { items: cart } });
+						addToCart(item, -item.quantity);
+						setCart(getCart());
 					}}
 				>
-					Checkout
+					<TbTrash />
 				</button>
+
 			</div>
+		))}
+
+		{/* TOTAL BAR */}
+		<div className="w-full max-w-4xl bg-white rounded-xl shadow p-4 flex justify-between items-center">
+
+			<button
+				onClick={() => navigate("/checkout", { state: { items: cart } })}
+				className="bg-[#2C183E] text-white px-6 py-2 rounded-lg hover:bg-[#7B3F8C]"
+			>
+				Checkout
+			</button>
+
+			<span className="font-bold text-lg text-[#2C183E]">
+				Total: {getTotal().toLocaleString("en-US")}
+			</span>
+
 		</div>
-	);
+
+	</div>
+);
 }

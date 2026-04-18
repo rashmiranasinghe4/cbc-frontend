@@ -96,132 +96,127 @@ export default function CheckoutPage() {
 
   console.log(cart);
   return (
-    <div className="w-[100vw] max-w-[100vw] h-screen flex flex-col px-[10px] py-[40px] items-center">
-      {cart.map((item, index) => {
-        return (
-          <div
-            key={item.productId}
-            className="w-full md:w-[800px] h-[200px] md:h-[100px] m-[10px] shadow-2xl flex flex-row items-center relative"
-          >
-            <div className="md:w-[100px] w-[200px] justify-center items-center flex flex-col text-2xl md:text-md">
-              <img
-                src={item.image}
-                className="w-[100px] h-[100px] object-cover"
-              />
-              <div className="h-full flex-col justify-center pl-[10px] md:hidden flex">
-                <span className="font-bold text-center md:text-left">
-                  {item.name}
-                </span>
-                <span className="font-semibold text-center md:text-left">
-                  {item.price.toLocaleString("en-US", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
-                </span>
-              </div>
-            </div>
+	<div className="min-h-screen bg-[#F3E8F7] flex flex-col items-center py-10 px-4 gap-6">
 
-            <div className="w-[320px] h-full flex-col justify-center pl-[10px] hidden md:flex">
-              <span className="font-bold text-center md:text-left">
-                {item.name}
-              </span>
-              <span className="font-semibold text-center md:text-left">
-                {item.price.toLocaleString("en-US", {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
-              </span>
-            </div>
+		{/* CART ITEMS */}
+		{cart.map((item, index) => (
+			<div
+				key={item.productId}
+				className="w-full max-w-4xl bg-white rounded-xl shadow-md flex items-center p-4 gap-4"
+			>
 
-            <div className="w-[190px] h-full text-4xl md:text-md flex flex-row justify-center items-center">
-              <button
-                className="flex justify-center items-center w-[30px] rounded-lg bg-accent text-white cursor-pointer hover:bg-blue-400"
-                onClick={() => {
-                  const newCart = [...cart];
-                  newCart[index].quantity -= 1;
-                  if (newCart[index].quantity <= 0) {
-                    newCart.splice(index, 1);
-                  }
-                  setCart(newCart);
-                }}
-              >
-                -
-              </button>
-              <span className="mx-[10px]">{item.quantity}</span>
-              <button
-                className="flex justify-center items-center w-[30px] rounded-lg bg-accent text-white cursor-pointer hover:bg-blue-400"
-                onClick={() => {
-                  const newCart = [...cart];
-                  newCart[index].quantity += 1;
-                  setCart(newCart);
-                }}
-              >
-                +
-              </button>
-            </div>
+				{/* IMAGE */}
+				<img
+					src={item.image}
+					className="w-20 h-20 object-cover rounded-lg border"
+				/>
 
-            <div className="w-[190px] text-3xl md:text-md h-full flex justify-end items-center pr-[10px]">
-              <span className="font-semibold">
-                {(item.quantity * item.price).toLocaleString("en-US", {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
-              </span>
-            </div>
+				{/* NAME */}
+				<div className="flex-1">
+					<p className="font-bold text-[#2C183E]">{item.name}</p>
+					<p className="text-gray-500">
+						{item.price.toLocaleString("en-US", {
+							minimumFractionDigits: 2,
+							maximumFractionDigits: 2,
+						})}
+					</p>
+				</div>
 
-            <button
-              className="w-[30px] h-[30px] absolute top-[0px] right-[0px] md:top-[35px] md:right-[-40px] cursor-pointer bg-red-700 shadow rounded-full flex justify-center items-center text-white border-[2px] border-red-700 hover:bg-white hover:text-red-700"
-              onClick={() => {
-                const newCart = [...cart];
-                newCart.splice(index, 1);
-                setCart(newCart);
-              }}
-            >
-              <TbTrash className="text-xl" />
-            </button>
-          </div>
-        );
-      })}
+				{/* QTY */}
+				<div className="flex items-center gap-2">
 
-      <div className="md:w-[800px] w-full h-[100px] m-[10px] p-[10px] shadow-2xl flex flex-row items-center justify-end relative">
-        <span className="font-bold text-2xl">
-          Total:{" "}
-          {getTotal().toLocaleString("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })}
-        </span>
-        <button
-          onClick={placeOrder}
-          className="absolute left-[10px] w-[200px] text-2xl md:text-md md:w-[150px] h-[50px] cursor-pointer rounded-lg shadow-2xl bg-accent border-[2px] border-accent text-blue hover:bg-white hover:text-accent"
-        >
-          Place Order
-        </button>
-      </div>
+					<button
+						className="w-8 h-8 bg-[#7B3F8C] text-white rounded"
+						onClick={() => {
+							const newCart = [...cart];
+							newCart[index].quantity -= 1;
+							if (newCart[index].quantity <= 0) newCart.splice(index, 1);
+							setCart(newCart);
+						}}
+					>
+						-
+					</button>
 
-      <div className="md:w-[800px] w-full m-[10px] p-[10px] shadow-2xl flex flex-col md:flex-row items-center justify-center gap-2">
-        <input
-          className="w-full md:w-[200px] h-[40px] border border-gray-300 rounded-lg p-[10px]"
-          type="text"
-          placeholder="Enter your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          className="w-full md:w-[200px] h-[40px] border border-gray-300 rounded-lg p-[10px]"
-          type="text"
-          placeholder="Enter your address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-        <input
-          className="w-full md:w-[200px] h-[40px] border border-gray-300 rounded-lg p-[10px]"
-          type="text"
-          placeholder="Enter your phone number"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-      </div>
-    </div>
-  );
+					<span>{item.quantity}</span>
+
+					<button
+						className="w-8 h-8 bg-[#7B3F8C] text-white rounded"
+						onClick={() => {
+							const newCart = [...cart];
+							newCart[index].quantity += 1;
+							setCart(newCart);
+						}}
+					>
+						+
+					</button>
+
+				</div>
+
+				{/* TOTAL */}
+				<div className="font-bold text-[#7B3F8C]">
+					{(item.quantity * item.price).toLocaleString("en-US", {
+						minimumFractionDigits: 2,
+						maximumFractionDigits: 2,
+					})}
+				</div>
+
+				{/* DELETE */}
+				<button
+					className="text-red-600 hover:text-red-800"
+					onClick={() => {
+						const newCart = [...cart];
+						newCart.splice(index, 1);
+						setCart(newCart);
+					}}
+				>
+					<TbTrash />
+				</button>
+
+			</div>
+		))}
+
+		{/* TOTAL BOX */}
+		<div className="w-full max-w-4xl bg-white p-4 rounded-xl shadow flex justify-between items-center">
+
+			<span className="text-xl font-bold text-[#2C183E]">
+				Total: {getTotal().toLocaleString("en-US")}
+			</span>
+
+			<button
+				onClick={placeOrder}
+				className="bg-[#2C183E] text-white px-6 py-2 rounded-lg hover:bg-[#7B3F8C]"
+			>
+				Place Order
+			</button>
+
+		</div>
+
+		{/* INPUTS */}
+		<div className="w-full max-w-4xl bg-white p-4 rounded-xl shadow flex flex-col md:flex-row gap-3">
+
+			<input
+				className="flex-1 border p-2 rounded"
+				placeholder="Name"
+				value={name}
+				onChange={(e) => setName(e.target.value)}
+			/>
+
+			<input
+				className="flex-1 border p-2 rounded"
+				placeholder="Address"
+				value={address}
+				onChange={(e) => setAddress(e.target.value)}
+			/>
+
+			<input
+				className="flex-1 border p-2 rounded"
+				placeholder="Phone"
+				value={phone}
+				onChange={(e) => setPhone(e.target.value)}
+			/>
+
+		</div>
+
+	</div>
+);
 }

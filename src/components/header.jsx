@@ -128,6 +128,7 @@ export default function Header() {
 	  className="px-4 py-1 rounded-full bg-white text-accent hover:opacity-80 transition"
 	>
 	  Logout
+	  
 	</button>
   )}
 
