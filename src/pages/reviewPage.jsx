@@ -16,9 +16,9 @@ function StarRating({ rating }) {
       {[1, 2, 3, 4, 5].map((s) => (
         <span
           key={s}
-          className={`text-lg ${s <= rating ? "text-pink-400" : "text-gray-300"}`}
+          className={`text-lg ${s <= rating ? "text-accent" : "text-gray-300"}`}
         >
-          &#9733;
+          ★
         </span>
       ))}
     </div>
@@ -35,17 +35,17 @@ export default function ReviewsPage() {
   }
 
   return (
-    <div className="w-full min-h-full px-4 py-12">
+    <div className="w-full min-h-full px-4 py-12 bg-primary">
 
       {/* Header */}
       <div className="text-center mb-12">
-        <p className="text-pink-400 text-sm font-semibold tracking-widest uppercase mb-2">
+        <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-2">
           What people say
         </p>
-        <h1 className="text-3xl font-bold text-gray-800">Customer Reviews</h1>
+        <h1 className="text-3xl font-bold text-secondary">Customer Reviews</h1>
       </div>
 
-      {/* Reviews Grid */}
+      {/* Reviews */}
       <div className="max-w-5xl mx-auto flex flex-wrap gap-6 justify-center mb-16">
         {STATIC_REVIEWS.map((r, i) => (
           <div
@@ -53,38 +53,41 @@ export default function ReviewsPage() {
             className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 w-[280px]"
           >
             <StarRating rating={r.rating} />
-            <p className="text-gray-600 text-sm mb-4">"{r.comment}"</p>
+            <p className="text-secondary/70 text-sm mb-4">"{r.comment}"</p>
             <div className="flex justify-between items-center">
-              <span className="font-semibold text-gray-800 text-sm">{r.name}</span>
-              <span className="text-gray-400 text-xs">{r.date}</span>
+              <span className="font-semibold text-secondary text-sm">{r.name}</span>
+              <span className="text-secondary/40 text-xs">{r.date}</span>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Leave a Review Form */}
-      <div className="max-w-lg mx-auto bg-pink-50 rounded-2xl p-8">
-        <h2 className="text-xl font-bold text-gray-800 mb-6 text-center">
+      {/* Form */}
+      <div className="max-w-lg mx-auto bg-white rounded-2xl p-8 shadow-md">
+        <h2 className="text-xl font-bold text-secondary mb-6 text-center">
           Leave a Review
         </h2>
+
         {submitted ? (
-          <p className="text-center text-pink-500 font-semibold">
+          <p className="text-center text-accent font-semibold">
             Thank you for your review!
           </p>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+
             <input
               type="text"
               placeholder="Your name"
               required
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full h-[42px] border border-gray-300 rounded-lg px-3 text-sm"
+              className="w-full h-[42px] border border-gray-300 rounded-lg px-3 text-sm focus:border-accent outline-none"
             />
+
             <select
               value={form.rating}
               onChange={(e) => setForm({ ...form, rating: Number(e.target.value) })}
-              className="w-full h-[42px] border border-gray-300 rounded-lg px-3 text-sm text-gray-600"
+              className="w-full h-[42px] border border-gray-300 rounded-lg px-3 text-sm text-secondary focus:border-accent outline-none"
             >
               {[5, 4, 3, 2, 1].map((n) => (
                 <option key={n} value={n}>
@@ -92,24 +95,26 @@ export default function ReviewsPage() {
                 </option>
               ))}
             </select>
+
             <textarea
               placeholder="Write your review..."
               required
               rows={4}
               value={form.comment}
               onChange={(e) => setForm({ ...form, comment: e.target.value })}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm resize-none"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm resize-none focus:border-accent outline-none"
             />
+
             <button
               type="submit"
-              className="bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-full font-semibold transition-colors duration-200"
+              className="bg-accent hover:opacity-90 text-white py-3 rounded-full font-semibold transition-all duration-200"
             >
               Submit Review
             </button>
+
           </form>
         )}
       </div>
-
     </div>
   );
 }

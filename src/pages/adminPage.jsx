@@ -1,5 +1,7 @@
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { FaBoxArchive } from "react-icons/fa6";
+
+
 import { GiShoppingBag } from "react-icons/gi";
 import { IoPeople } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
@@ -14,6 +16,7 @@ import { useEffect, useState } from "react";
 import Loader from "../components/loader";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { LuLayoutDashboard } from "react-icons/lu";
 
 export default function AdminPage() {
 	const navigate = useNavigate();
@@ -48,6 +51,13 @@ export default function AdminPage() {
 			{adminValidated?<>
 				<div className="w-[300px] h-full flex flex-col items-center">
 					<span className="text-3xl font-bold my-5">Admin Panel</span>
+
+					<Link
+						className="flex flex-row h-[60px] w-full  border p-[20px] items-center text-xl  gap-[25px]"
+						to="/admin/products"
+					>
+						< LuLayoutDashboard/> Dashboard
+					</Link>
 
 					<Link
 						className="flex flex-row h-[60px] w-full  border p-[20px] items-center text-xl  gap-[25px]"
