@@ -86,19 +86,19 @@ export default function Header() {
                 }
             }/>
 			<div className="hidden w-full md:flex justify-center items-center">
-				<Link to="/" className="text-white text-xl ">
+				<Link to="/" className="text-white text-xl hover:scale-110">
 					Home
 				</Link>
-				<Link to="/products" className="ml-4 text-white text-xl">
+				<Link to="/products" className="ml-4 text-white text-xl hover:scale-110">
 					Products
 				</Link>
-				<Link to="/reviews" className="ml-4 text-white text-xl">
+				<Link to="/reviews" className="ml-4 text-white text-xl hover:scale-110">
 					Reviews
 				</Link>
-				<Link to="/about-us" className="ml-4 text-white text-xl">
+				<Link to="/about-us" className="ml-4 text-white text-xl hover:scale-110">
 					About Us
 				</Link>
-				<Link to="/contact-us" className="ml-4 text-white text-xl">
+				<Link to="/contact-us" className="ml-4 text-white text-xl hover:scale-110">
 					Contact Us
 				</Link>
 				<Link to="/cart" className="absolute right-[350px] top-1/2 -translate-y-1/2 z-50"> 
@@ -109,14 +109,14 @@ export default function Header() {
   {/* always show */}
   <Link 
 	to="/login" 
-	className="px-4 py-1 rounded-full border border-white text-accent bg-white hover:text-accent transition"
+	className="px-4 py-1 rounded-full border border-white text-accent bg-white hover:text-accent hover:opacity-80 tracking-wider transition"
   >
 	Login
   </Link>
 
   <Link
 	to="/register"
-	className="px-4 py-1 rounded-full border border-white text- bg-white text-accent transition"
+	className="px-4 py-1 rounded-full border border-white text- bg-white text-accent transition hover:opacity-80"
   >
 	Sign Up
   </Link>

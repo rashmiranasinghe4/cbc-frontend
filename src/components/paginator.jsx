@@ -1,3 +1,5 @@
+
+
 export default function Paginator(props){
     const { currentPage , totalPages, setCurrentPage , limit , setLimit , setLoading} = props // deconstructing a json
 

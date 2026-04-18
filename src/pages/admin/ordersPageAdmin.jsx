@@ -43,10 +43,22 @@ export default function OrdersPageAdmin() {
 	}, [loading, page, limit]);
 
 	return (
-		<div className="w-full h-full flex flex-col justify-between">
-			<table className="w-full border-[3px]">
+		<div className="min-h-screen bg-[#F3E8F7] flex flex-col p-6">
+  <div className="bg-white rounded-xl shadow-lg p-6 flex-1">
+	
+      {/* HEADER */}
+				<div className="flex justify-between items-center px-5 py-4 border-b">
+					<h2 className="text-sm font-semibold text-[#2C183E]">
+						All Orders
+					</h2>
+					<span className="text-xs text-gray-400">
+						{orders.length} orders
+					</span>
+				</div>
+			 <table className="w-full text-sm">
+
 				<thead>
-					<tr>
+					<tr  className="bg-[#F3E8F7] text- #2C183E border-b">
 						<th className="p-[10px]">Order ID</th>
 						<th className="p-[10px]">email</th>
 						<th className="p-[10px]">name</th>
@@ -56,13 +68,14 @@ export default function OrdersPageAdmin() {
 						<th className="p-[10px]">Date</th>
 						<th className="p-[10px]">Total</th>
 					</tr>
+
 				</thead>
 				<tbody>
 					{orders.map((order, index) => {
 						return (
 							<tr
 								key={index}
-								className="border-b-[1px] hover:bg-blue-600 hover:text-white"
+								className="border-b hover:bg-[#F3E8F7] transition cursor-pointer"
 								onClick={() => {
                                     setOrderStatus(order.status);
                                     setOrderNotes(order.notes);
@@ -70,16 +83,32 @@ export default function OrdersPageAdmin() {
 									setPopupVisible(true);
 								}}
 							>
-								<td className="p-[10px]">{order.orderID}</td>
+								<td className="p-3 font-medium text-[#2C183E]">
+									{order.orderID}
+								</td>
+								
 								<td className="p-[10px]">{order.email}</td>
 								<td className="p-[10px]">{order.name}</td>
 								<td className="p-[10px]">{order.address}</td>
 								<td className="p-[10px]">{order.phone}</td>
-								<td className="p-[10px]">{order.status}</td>
-								<td className="p-[10px]">
+								{/* STATUS */}
+								<td className="p-3">
+									<span
+										className={`px-2 py-1 text-xs rounded ${
+											order.status === "pending"
+												? "bg-yellow-100 text-yellow-700"
+												: order.status === "completed"
+												? "bg-[#F3E8F7] text-[#7B3F8C]"
+												: "bg-red-100 text-red-600"
+										}`}
+									>
+										{order.status}
+									</span>
+								</td>
+								<td className="p-3">
 									{new Date(order.date).toLocaleDateString()}
 								</td>
-								<td className="p-[10px] text-end">
+								<td className="p-3 text-right font-semibold text-[#7B3F8C]">
 									{order.total.toLocaleString("en-US", {
 										minimumFractionDigits: 2,
 										maximumFractionDigits: 2,
@@ -90,7 +119,7 @@ export default function OrdersPageAdmin() {
 					})}
 				</tbody>
 			</table>
-			\
+			
 			{popupVisible && clickedOrder && (
 				<div className="fixed top-0 left-0 w-full h-full bg-[#00000050] flex justify-center items-center z-50">
 					<div className="w-full max-w-2xl max-h-[600px] bg-white rounded-lg  p-6 relative shadow-xl">
@@ -166,10 +195,10 @@ export default function OrdersPageAdmin() {
 							<p>
 								<span className="font-semibold">Status:</span>{" "}
 								<span
-									className={`capitalize px-2 py-1 rounded ${
+									className={`px-2 py-1 text-xs rounded ${
 										clickedOrder.status === "pending"
-											? "bg-yellow-100 text-yellow-700"
-											: "bg-green-100 text-green-700"
+											? "bg-[#F3E8F7] text-[#7B3F8C]"
+											: "bg-red-100 text-red-600"
 									}`}
 								>
 									{clickedOrder.status}
@@ -240,5 +269,10 @@ export default function OrdersPageAdmin() {
 				setLoading={setLoading}
 			/>
 		</div>
+		
+	</div>
+	
 	);
 }
+
+
