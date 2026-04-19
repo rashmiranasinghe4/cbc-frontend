@@ -26,12 +26,9 @@ A modern and responsive frontend for a full-stack cosmetics e-commerce applicati
 
 🌐 Deployment
 
-- Hosted on Vercel / Netlify
+- Hosted on Vercel 
 - Optimized for performance and fast loading
 
-📸 Screenshots
-
-(Add screenshots here)
 
 ⚙️ Setup Instructions
 
@@ -43,4 +40,4 @@ A modern and responsive frontend for a full-stack cosmetics e-commerce applicati
 
 🔗 Live Demo
 
-(Add your deployed link)
+https://cbc-cosmatic-nu.vercel.app/
