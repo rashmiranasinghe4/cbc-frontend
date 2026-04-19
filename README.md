@@ -1,16 +1,46 @@
-# React + Vite
+💄 Cosmetics E-commerce Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive frontend for a full-stack cosmetics e-commerce application, built using React.js. This application delivers a seamless shopping experience with secure authentication, dynamic product browsing, and smooth checkout functionality.
 
-Currently, two official plugins are available:
+🚀 Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React.js (Vite)
+- Tailwind CSS
+- Axios
+- React Router DOM
 
-## React Compiler
+✨ Features
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🔐 User Authentication (Email & Google OAuth)
+- 🛍️ Product Listing & Detailed View
+- 🛒 Shopping Cart with real-time updates
+- 💳 Checkout Interface
+- 📱 Fully Responsive Design (Mobile & Desktop)
+- ⚡ Fast UI rendering using Vite
 
-## Expanding the ESLint configuration
+🔗 API Integration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Communicates with backend via REST APIs
+- JWT-based authentication handling
+- Secure API calls using Axios
+
+🌐 Deployment
+
+- Hosted on Vercel / Netlify
+- Optimized for performance and fast loading
+
+📸 Screenshots
+
+(Add screenshots here)
+
+⚙️ Setup Instructions
+
+1. Clone the repository
+2. Install dependencies
+   npm install
+3. Run the app
+   npm run dev
+
+🔗 Live Demo
+
+(Add your deployed link)
