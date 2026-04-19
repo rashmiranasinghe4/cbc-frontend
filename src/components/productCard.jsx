@@ -15,10 +15,10 @@ export default function ProductCard(props) {
 					{product.labelledPrice > product.price ? (
 						<p>
                             <span className="line-through mr-[10px]">{product.labelledPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-                            <span>{product.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                            <span>{product.price.toLocaleString('en-LK', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                         </p>
 					) : (
-						<span>{product.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+						<span>{product.price.toLocaleString('en-LK', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
 					)}
 				</div>
 			</div>

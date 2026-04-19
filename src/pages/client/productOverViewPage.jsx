@@ -78,14 +78,14 @@ export default function ProductOverViewPage() {
 						{product.labelledPrice > product.price ? (
 							<div className="flex gap-4 items-center">
 								<span className="line-through text-gray-400 text-xl">
-									{product.labelledPrice.toLocaleString("en-US", {
+									{product.labelledPrice.toLocaleString("en-LK", {
 										minimumFractionDigits: 2,
 										maximumFractionDigits: 2,
 									})}
 								</span>
 
 								<span className="text-3xl font-bold text-[#7B3F8C]">
-									{product.price.toLocaleString("en-US", {
+									{product.price.toLocaleString("en-LK", {
 										minimumFractionDigits: 2,
 										maximumFractionDigits: 2,
 									})}
@@ -93,7 +93,7 @@ export default function ProductOverViewPage() {
 							</div>
 						) : (
 							<span className="text-3xl font-bold text-[#7B3F8C]">
-								{product.price.toLocaleString("en-US", {
+								{product.price.toLocaleString("en-LK", {
 									minimumFractionDigits: 2,
 									maximumFractionDigits: 2,
 								})}

@@ -63,7 +63,10 @@ export default function ProductsAdminPage() {
 										<td className="p-3">{product.productId}</td>
 										<td className="p-3 font-medium">{product.name}</td>
 										<td className="p-3 text-[#7B3F8C] font-semibold">
-											${product.price}
+											{product.price.toLocaleString("en-LK", {
+												minimumFractionDigits: 2,
+												maximumFractionDigits: 2,
+											})}
 										</td>
 										<td className="p-3">{product.category}</td>
 										<td className="p-3">{product.stock}</td>
