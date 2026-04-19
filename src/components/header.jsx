@@ -1,78 +1,131 @@
-import { useState } from "react";
+
+import { AiOutlineUserAdd } from "react-icons/ai";
 import { BiCart, BiStore } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { FaSignInAlt, FaUserPlus ,FaSignOutAlt } from "react-icons/fa";
+import { MdContactMail, MdRateReview } from "react-icons/md";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 import { HiHome } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function Header() {
-	const navigate = useNavigate();
-	const [isOpen, setIsOpen] = useState(false);
-	const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+  const token = localStorage.getItem("token");
 
-	function logout() {
-  localStorage.removeItem("token");
-  setToken(null);
-  navigate("/"); // go home instead of login
-}
-	
-	
+  function logout() {
+    localStorage.removeItem("token");
+	setToken(null);
+    navigate("/");
+  }
 
-	return (
-		<header className="h-[100px] bg-accent flex justify-center items-center relative">
-			{isOpen && (
-				<div className="fixed z-[100] top-0 right-0 w-[100vw] h-[100vh] bg-[#00000050]">
-					<div className="h-full w-[350px] bg-white flex flex-col">
-						<div className="w-full bg-accent h-[100px] flex pl-[45px] flex-row items-center gap-[20px]">
-							<GiHamburgerMenu className="text-white text-4xl  md:hidden " onClick={()=>{
-                                setIsOpen(close);
-                            }}/>
-							<img
-								className="w-[150px] h-[80px] object-cover  cursor-pointer"
-								onClick={() => {
-									navigate("/");
-								}}
-								src="/logo.png"
-								alt="Logo"
-							/>
-						</div>
-						<div className="w-full h-full flex flex-col p-[45px] items-start">
-							<button
-								className="text-accent text-2xl flex flex-row items-center"
-								onClick={() => {
-									setIsOpen(false);
-									navigate("/");
-								}}
-							>
-								<HiHome className="text-accent text-2xl mr-2" />
-								Home
-							</button>
-                            {/* products */}
-                            <button
-								className="text-accent text-2xl flex flex-row items-center"
-								onClick={() => {
-									setIsOpen(false);
-									navigate("/products");
-								}}
-							>
-								<BiStore className="text-accent text-2xl mr-2" />
-								Products
-							</button>
-                            {/* cart */}
-                            <button
-								className="text-accent text-2xl flex flex-row items-center"
-								onClick={() => {
-									setIsOpen(false);
-									navigate("/cart");
-								}}
-							>
-								<BiCart className="text-accent text-2xl mr-2" />
-								Cart
-							</button>
-						</div>
+  return (
+    <header className="h-[100px] bg-accent flex justify-center items-center relative">
+
+      {/* MOBILE MENU */}
+      {isOpen && (
+        <div className="fixed z-[100] top-0 left-0 w-[100vw] h-[100vh] bg-[#00000050]">
+          
+          {/* SIDE PANEL */}
+          <div className="h-full w-[300px] bg-white flex flex-col">
+
+            {/* TOP BAR */}
+            <div className="w-full bg-accent h-[100px] flex items-center gap-5 px-6">
+              <GiHamburgerMenu
+                className="text-white text-4xl cursor-pointer"
+                onClick={() => setIsOpen(false)}
+              />
+              <img
+                src="/logo.png"
+                className="h-[70px] cursor-pointer"
+                onClick={() => {
+                  navigate("/");
+                  setIsOpen(false);
+                }}
+              />
+            </div>
+
+            {/* MENU ITEMS (LIKE YOUR IMAGE) */}
+            <div className="flex flex-col gap-6 p-8">
+
+              <button
+                className="text-accent text-2xl flex items-center gap-3"
+                onClick={() => { navigate("/"); setIsOpen(false); }}
+              >
+                <HiHome /> Home
+              </button>
+
+              <button
+                className="text-accent text-2xl flex items-center gap-3"
+                onClick={() => { navigate("/products"); setIsOpen(false); }}
+              >
+                <BiStore /> Products
+              </button>
+
+              <button
+                className="text-accent text-2xl flex items-center gap-3"
+                onClick={() => { navigate("/cart"); setIsOpen(false); }}
+              >
+                <BiCart /> Cart
+              </button>
+
+              {/* NEW ITEMS */}
+              <button
+                className="text-accent text-2xl flex items-center gap-3"
+                onClick={() => { navigate("/reviews"); setIsOpen(false); }}
+              >
+                <MdRateReview /> Reviews
+              </button>
+
+              <button
+                className="text-accent text-2xl flex items-center gap-3"
+                onClick={() => { navigate("/about-us"); setIsOpen(false); }}
+              >
+                <AiOutlineInfoCircle /> About Us
+              </button>
+
+              <button
+                className="text-accent text-2xl flex items-center gap-3"
+                onClick={() => { navigate("/contact-us"); setIsOpen(false); }}
+              >
+                <MdContactMail/> Contact Us
+              </button>
+
+              {/* AUTH (SAME LOGIC) */}
+              {!token && (
+                <>
+                  <button
+                    className="text-accent text-2xl flex items-center gap-3"
+                    onClick={() => { navigate("/login"); setIsOpen(false); }}
+                  >
+                    <FaSignInAlt /> Login
+                  </button>
+
+                  <button
+                    className="text-accent text-2xl flex items-center gap-3"
+                    onClick={() => { navigate("/register"); setIsOpen(false); }}
+                  >
+                    <FaUserPlus/> Sign Up
+                  </button>
+
+				  <button
+                    className="text-accent text-2xl flex items-center gap-3"
+                    onClick={() => { navigate("/register"); setIsOpen(false); }}
+                  >
+                    <FaSignOutAlt/> logout
+                  </button>
+                </>
+			  )}			
+</div>
 					</div>
 				</div>
-			)}
-			<img
+	  )}	
+
+              
+
+      {/* LOGO */}
+      <img
 				className="w-[150px] h-[80px] object-cover absolute md:left-[40px] cursor-pointer"
 				onClick={() => {
 					navigate("/");
@@ -128,12 +181,12 @@ export default function Header() {
 	  className="px-4 py-1 rounded-full bg-white text-accent hover:opacity-80 transition"
 	>
 	  Logout
-	  
-	</button>
-  )}
+            </button>
+          )}
 
-				</div>
-			</div>
-		</header>
-	);
-}
+        </div>
+      </div>
+
+    </header>
+  );
+}		
